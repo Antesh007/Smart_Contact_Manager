@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en" xlmns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>This is Home Page</title>
+</head>
+
+<body>
+
+	<section>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 offset-md-3">
+				
+				<div class="my-card mt-3">
+				
+				<div class="container text-center">
+				<img style="width:10%;" th:src="@{/image/register.png}" alt="" />
+				</div>
+
+					<h1 class="text-center">Register</h1>
+
+					<form th:action="@{register}" method="post" th:object="${user}">
+
+
+					<div class="mb-3">
+						<label for="exampleInputEmail1" class="form-label">Name</label>
+						<input type="text" class="form-control" id="name_field" aria-describedby="emailHelp"
+						th:value="${user.name}" name="name" placeholder="Enter Your Name" Required>
+					</div>
+
+
+					<div class="mb-3">
+						<label for="exampleInputEmail1" class="form-label">Email</label>
+						<input type="email" class="form-control" id="email_field" aria-describedby="emailHelp"
+						th:value="${user.email}" name="email" placeholder="Enter Your Email" Required>
+					</div>
+
+
+					<div class="mb-3">
+						<label for="exampleInputPassword1" class="form-label">Password</label>
+						<input type="password" class="form-control" id="password_field"
+						 name="password" placeholder="Enter Your Password" Required>
+					</div>
+					
+					<div class="mb-3">
+					<textarea placeholder="Write About Yourself" rows="3" class="form-control" th:value="${user.about}" name="about"></textarea>
+					</div>
+					
+					<div class="mb-3 text-center">
+						<input type="checkbox" name="agree" class="form-check-input" id="agree"/>
+						<label for="agree">Accept terms and conditions</label>
+					</div>
+					
+					<div class="container text-center">
+					<button type="submit" class="btn bg-primary text-white">Submit</button>
+					
+					
+					<button type="reset" class="btn btn-warning">Clear All</button>
+					</div>
+					
+					</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</section>
+
+</body>
+
+</html>
