@@ -5,8 +5,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import com.smartcontactmanager.entities.User;
 import com.smartcontactmanager.repository.UserRepository;
-import com.smartcontactmanager.user.User;
 
 public class UserDetailServiceImpl implements UserDetailsService {
 	

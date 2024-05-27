@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.smartcontactmanager.repository.UserRepository;
-import com.smartcontactmanager.user.User;
+import com.smartcontactmanager.entities.User;
 import com.smartcontactmanager.helper.*;
 
 import jakarta.servlet.http.HttpSession;

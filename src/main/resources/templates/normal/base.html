@@ -28,17 +28,18 @@
           <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
         </li>
         
-        <li class="nav-item">
-          <a class="nav-link" href="#">About</a>
-        </li>
-       
-         
-        <li class="nav-item">
-          <a class="nav-link " aria-disabled="true" th:href="@{/signin}">Login</a>
+    
+        <li class="nav-item"><a class="nav-link " href="#" 
+        tab-index="-1" aria-disabled="true"><span th:text="${user.name}"></span></a>
         </li>
         
         <li class="nav-item">
-          <a class="nav-link " aria-disabled="true" th:href="@{/signup}">SignUp</a>
+         <div>
+        <form id="logout-form" th:action="@{/logout}" method="post" style="display:none;">
+            <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+        </form>
+        <a href="#" onclick="document.getElementById('logout-form').submit(); return false;" class="nav-link">Logout</a>
+    </div>
         </li>
         
       </ul>
