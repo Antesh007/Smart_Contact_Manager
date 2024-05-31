@@ -39,7 +39,7 @@
 				
 				</div>
 			
-			<input type="text" id="firstName" name="name" placeholder="Enter name here" class="form-control" />
+			<input required type="text" id="firstName" name="name" placeholder="Enter name here" class="form-control" />
 			
 			</div>
 			
@@ -56,7 +56,7 @@
 				
 				</div>
 			
-			<input type="text" id="secondName" name="secondName" placeholder="Enter Nickname here" class="form-control" />
+			<input required type="text" id="secondName" name="secondName" placeholder="Enter Nickname here" class="form-control" />
 			
 			</div>
 			
@@ -73,7 +73,7 @@
 				
 				</div>
 			
-			<input type="number" id="phone" name="phone" placeholder="Enter Mobile Number here" class="form-control" />
+			<input required type="number" id="phone" name="phone" placeholder="Enter Mobile Number here" class="form-control" />
 			
 			</div>
 			
@@ -90,7 +90,7 @@
 				
 				</div>
 			
-			<input type="email" id="email" name="email" placeholder="Enter Email here" class="form-control" />
+			<input required type="email" id="email" name="email" placeholder="Enter Email here" class="form-control" />
 			
 			</div>
 			
@@ -107,20 +107,20 @@
 				
 				</div>
 			
-						<input type="text" id="work" name="work" placeholder="Enter your work here" class="form-control" />
+						<input required type="text" id="work" name="work" placeholder="Enter your work here" class="form-control" />
 
 			</div>
 			
 			
 			<div class="form-group mt-3">
 			
-			<textarea placeholder="Enter contact Details" name="description" id="description"  rows="10" style=" width: -webkit-fill-available;"></textarea>
+			<textarea placeholder="Enter contact Details" name="description" id="mytextarea"  rows="10" style=" width: -webkit-fill-available;"></textarea>
 			
 			</div>
 			
 			
 			<div class="custom-file mt-3">
-			<input type="file" name="profileImage" />
+			<input required type="file" name="profileImage" />
 			</div>
 			
 			
@@ -140,8 +140,18 @@
 			 </div>
 	
 		</div>
+		<!-- Tiny MCE added by Antesh Mukherjee || I have added my API KEY here ... -->
+		<script src="https://cdn.tiny.cloud/1/i92f4gcimeerrn24oj7l71pohrc87mwkav7qmlb7rgk19690/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+
+<script>
+      tinymce.init({
+        selector: '#mytextarea'
+      });
+    </script>
 
 </section>
+
+
 	
 </body>
 </html>
