@@ -39,13 +39,18 @@
 		<span th:text="${c.email}"></span> </a>
 		</td>
       <td>
+      		<a th:href="@{'/user/'+${c.cId}+'/update'}" href="#">
       		<button  class="btn btn-primary btn-sm">
-      		Update
+      		 Update
       		</button>
-      		<button class="btn btn-danger btn-sm">
+      		</a>
+      		
+      		<a th:onclick="|deleteContact(${c.cId})|" href="#">
+      		<button  class="btn btn-danger btn-sm">
       		 Delete
       		</button>
-      
+      		</a>
+      		
       </td>
     </tr>
    

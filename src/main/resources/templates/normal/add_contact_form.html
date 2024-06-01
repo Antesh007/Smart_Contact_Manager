@@ -12,7 +12,7 @@
 		
 			<div class="card-body">
 			
-			<h1 class="text-center">Add Contact</h1>
+			<h1 th:text="${header}" class="text-center">Add Contact</h1>
 			
 			<div class="container-fluid mt-1">
 			
@@ -24,7 +24,7 @@
 				th:object="${contact}"	
 				enctype="multipart/form-data"
 				method="post"
-				th:action="@{/user/process-contact}"
+				th:action="@{'/user/process-contact/'+${contact.cId}}"
 				class="mt-2"	>
 			
 			<div class="input-group">
@@ -39,7 +39,8 @@
 				
 				</div>
 			
-			<input required type="text" id="firstName" name="name" placeholder="Enter name here" class="form-control" />
+			<input required th:value="${contact.name}" type="text" id="firstName" name="name" placeholder="Enter name here" class="form-control" />
+			
 			
 			</div>
 			
@@ -56,7 +57,7 @@
 				
 				</div>
 			
-			<input required type="text" id="secondName" name="secondName" placeholder="Enter Nickname here" class="form-control" />
+			<input required type="text" th:value="${contact.secondName}" id="secondName" name="secondName" placeholder="Enter Nickname here" class="form-control" />
 			
 			</div>
 			
@@ -73,7 +74,7 @@
 				
 				</div>
 			
-			<input required type="number" id="phone" name="phone" placeholder="Enter Mobile Number here" class="form-control" />
+			<input required type="number" th:value="${contact.phone}" id="phone" name="phone" placeholder="Enter Mobile Number here" class="form-control" />
 			
 			</div>
 			
@@ -90,7 +91,7 @@
 				
 				</div>
 			
-			<input required type="email" id="email" name="email" placeholder="Enter Email here" class="form-control" />
+			<input required type="email" th:value="${contact.email}" id="email" name="email" placeholder="Enter Email here" class="form-control" />
 			
 			</div>
 			
@@ -107,20 +108,20 @@
 				
 				</div>
 			
-						<input required type="text" id="work" name="work" placeholder="Enter your work here" class="form-control" />
+						<input required type="text" th:value="${contact.work}" id="work" name="work" placeholder="Enter your work here" class="form-control" />
 
 			</div>
 			
 			
 			<div class="form-group mt-3">
 			
-			<textarea placeholder="Enter contact Details" name="description" id="mytextarea"  rows="10" style=" width: -webkit-fill-available;"></textarea>
+			<textarea placeholder="Enter contact Details" th:text="${contact.description}" name="description" id="mytextarea"  rows="10" style=" width: -webkit-fill-available;"></textarea>
 			
 			</div>
 			
 			
 			<div class="custom-file mt-3">
-			<input required type="file" name="profileImage" />
+			<input type="file" name="profileImage" />
 			</div>
 			
 			
