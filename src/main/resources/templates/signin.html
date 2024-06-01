@@ -9,53 +9,56 @@
 <body>
 
 	<section>
-			 <div id="login">
-        <div class="container">
-            <div id="login-row" class="row justify-content-center align-items-center">
-                <div id="login-column" class="col-md-6">
-                    <div id="login-box" class="col-md-12">
-                    
-                        <form id="login-form" class="form" th:action="@{/user_login}" method="post">
-                        
-                            <h3 class="text-center text-info">Login</h3>
-                            
-                            <div th:if="${param.error}" class="alert alert-danger">
-                            Invalid Username and Password !!
-                            </div>
-                            
-                            <div th:if="${param.logoutSuccess}" class="alert alert-success">
-                            Logged out successfully !!
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="username" class="text-info">Username:</label><br>
-                                <input type="text" name="username" id="username" class="form-control">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="password" class="text-info">Password:</label><br>
-                                <input type="password" name="password" id="password" class="form-control">
-                            </div>
-                            <br />
-                      			<div class="container" style="display: inline-flex;">
-                            <div class="form-group" style="width: 50%;">
-                                <label for="remember-me" class="text-info"><span><input id="remember-me" name="remember-me" type="checkbox"></span> <span>Remember me</span></label><br>
-                            </div>
-                           
-                            <div id="register-link" class="text-right" style="width: 50%;text-align: right;">
-                                <a href="/signup" class="text-info">Register here</a>
-                            </div>
-                            </div>
-                            <br />
-                            <div class="text-center">
-                              <input type="submit" name="submit" class="btn btn-info btn-md text-center" value="submit">
-                 			</div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+		<div id="login">
+			<div class="container">
+				<div id="login-row" class="row justify-content-center align-items-center">
+					<div id="login-column" class="col-md-6">
+						<div id="login-box" class="col-md-12">
+
+							<form id="login-form" class="form" th:action="@{/user_login}" method="post">
+
+								<h3 class="text-center text-info">Login</h3>
+
+								<div th:if="${param.error}" class="alert alert-danger">
+									Invalid Username and Password !!
+								</div>
+
+								<div th:if="${param.logoutSuccess}" class="alert alert-success">
+									Logged out successfully !!
+								</div>
+
+								<div class="form-group">
+									<label for="username" class="text-info">Username:</label><br>
+									<input type="text" name="username" id="username" class="form-control">
+								</div>
+
+								<div class="form-group">
+									<label for="password" class="text-info">Password:</label><br>
+									<input type="password" name="password" id="password" class="form-control">
+								</div>
+								<br />
+								<div class="container" style="display: inline-flex;">
+									<div class="form-group" style="width: 50%;">
+										<label for="remember-me" class="text-info"><span><input id="remember-me"
+													name="remember-me" type="checkbox"></span> <span>Remember
+												me</span></label><br>
+									</div>
+
+									<div id="register-link" class="text-right" style="width: 50%;text-align: right;">
+										<a href="/signup" class="text-info">Register here</a>
+									</div>
+								</div>
+								<br />
+								<div class="text-center">
+									<input type="submit" name="submit" class="btn btn-info btn-md text-center"
+										value="submit">
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
 	</section>
 

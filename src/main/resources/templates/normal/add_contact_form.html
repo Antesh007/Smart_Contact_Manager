@@ -1,158 +1,166 @@
 <!doctype html>
-<html lang="en" xlmns:th="http://www.thymeleaf.org"  th:replace="normal/base::layout(~{::section})">
+<html lang="en" xlmns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+
 <head>
 	<meta charset="UTF-8" />
 	<title>This is Home Page</title>
 </head>
+
 <body>
 
-<section >
+	<section>
 
 		<div class="card mr-3">
-		
+
 			<div class="card-body">
-			
-			<h1 th:text="${header}" class="text-center">Add Contact</h1>
-			
-			<div class="container-fluid mt-1">
-			
-			<div class="row">
-			
-			<div class="col-md-10 offset-md-1">
-			
-			<form action="#"
-				th:object="${contact}"	
-				enctype="multipart/form-data"
-				method="post"
-				th:action="@{'/user/process-contact/'+${contact.cId}}"
-				class="mt-2"	>
-			
-			<div class="input-group">
-			
-				<div class="input-group-prepend">
-			
-					<div class="input-group-text">
-			
-						<i class="fa-solid fa-plus" style="height: 25px; align-content: center;"></i>
-							
+
+				<h1 th:text="${header}" class="text-center">Add Contact</h1>
+
+				<div class="container-fluid mt-1">
+
+					<div class="row">
+
+						<div class="col-md-10 offset-md-1">
+
+							<form action="#" th:object="${contact}" enctype="multipart/form-data" method="post"
+								th:action="@{'/user/process-contact/'+${contact.cId}}" class="mt-2">
+
+								<div class="input-group">
+
+									<div class="input-group-prepend">
+
+										<div class="input-group-text">
+
+											<i class="fa-solid fa-plus"
+												style="height: 25px; align-content: center;"></i>
+
+										</div>
+
+									</div>
+
+									<input required th:value="${contact.name}" type="text" id="firstName" name="name"
+										placeholder="Enter name here" class="form-control" />
+
+
+								</div>
+
+
+								<div class="input-group mt-3">
+
+									<div class="input-group-prepend">
+
+										<div class="input-group-text">
+
+											<i class="fas fa-user-alt" style="height: 25px; align-content: center;"></i>
+
+										</div>
+
+									</div>
+
+									<input required type="text" th:value="${contact.secondName}" id="secondName"
+										name="secondName" placeholder="Enter Nickname here" class="form-control" />
+
+								</div>
+
+
+								<div class="input-group mt-3">
+
+									<div class="input-group-prepend">
+
+										<div class="input-group-text">
+
+											<i class="fa fa-phone" style="height: 25px; align-content: center;"></i>
+
+										</div>
+
+									</div>
+
+									<input required type="number" th:value="${contact.phone}" id="phone" name="phone"
+										placeholder="Enter Mobile Number here" class="form-control" />
+
+								</div>
+
+
+								<div class="input-group mt-3">
+
+									<div class="input-group-prepend">
+
+										<div class="input-group-text">
+
+											@
+
+										</div>
+
+									</div>
+
+									<input required type="email" th:value="${contact.email}" id="email" name="email"
+										placeholder="Enter Email here" class="form-control" />
+
+								</div>
+
+
+								<div class="input-group mt-3">
+
+									<div class="input-group-prepend">
+
+										<div class="input-group-text">
+
+											<i class="fa fa-briefcase" style="height: 25px; align-content: center;"></i>
+
+										</div>
+
+									</div>
+
+									<input required type="text" th:value="${contact.work}" id="work" name="work"
+										placeholder="Enter your work here" class="form-control" />
+
+								</div>
+
+
+								<div class="form-group mt-3">
+
+									<textarea placeholder="Enter contact Details" th:text="${contact.description}"
+										name="description" id="mytextarea" rows="10"
+										style=" width: -webkit-fill-available;"></textarea>
+
+								</div>
+
+
+								<div class="custom-file mt-3">
+									<input type="file" name="profileImage" />
+								</div>
+
+
+								<div class="container text-center">
+									<button type="submit" class="btn btn-outline-primary">Save Contact</button>
+								</div>
+
+
+							</form>
+
+						</div>
+
 					</div>
-				
+
 				</div>
-			
-			<input required th:value="${contact.name}" type="text" id="firstName" name="name" placeholder="Enter name here" class="form-control" />
-			
-			
-			</div>
-			
-			
-			<div class="input-group mt-3">
-			
-				<div class="input-group-prepend">
-			
-					<div class="input-group-text">
-			
-							<i class="fas fa-user-alt" style="height: 25px; align-content: center;"></i>
-							
-					</div>
-				
-				</div>
-			
-			<input required type="text" th:value="${contact.secondName}" id="secondName" name="secondName" placeholder="Enter Nickname here" class="form-control" />
-			
-			</div>
-			
-			
-			<div class="input-group mt-3">
-			
-				<div class="input-group-prepend">
-			
-					<div class="input-group-text">
-			
-							<i class="fa fa-phone" style="height: 25px; align-content: center;"></i>
-							
-					</div>
-				
-				</div>
-			
-			<input required type="number" th:value="${contact.phone}" id="phone" name="phone" placeholder="Enter Mobile Number here" class="form-control" />
-			
-			</div>
-			
-			
-			<div class="input-group mt-3">
-			
-				<div class="input-group-prepend">
-			
-					<div class="input-group-text">
-			
-							@
-							
-					</div>
-				
-				</div>
-			
-			<input required type="email" th:value="${contact.email}" id="email" name="email" placeholder="Enter Email here" class="form-control" />
-			
-			</div>
-			
-			
-			<div class="input-group mt-3">
-			
-				<div class="input-group-prepend">
-			
-					<div class="input-group-text">
-			
-							<i class="fa fa-briefcase" style="height: 25px; align-content: center;"></i>
-							
-					</div>
-				
-				</div>
-			
-						<input required type="text" th:value="${contact.work}" id="work" name="work" placeholder="Enter your work here" class="form-control" />
 
 			</div>
-			
-			
-			<div class="form-group mt-3">
-			
-			<textarea placeholder="Enter contact Details" th:text="${contact.description}" name="description" id="mytextarea"  rows="10" style=" width: -webkit-fill-available;"></textarea>
-			
-			</div>
-			
-			
-			<div class="custom-file mt-3">
-			<input type="file" name="profileImage" />
-			</div>
-			
-			
-			<div class="container text-center">
-			<button type="submit" class="btn btn-outline-primary">Save Contact</button>
-			</div>
-			
-			
-			</form>
-			
-			</div>
-			
-			</div>
-			
-			</div>
-			
-			 </div>
-	
+
 		</div>
 		<!-- Tiny MCE added by Antesh Mukherjee || I have added my API KEY here ... -->
-		<script src="https://cdn.tiny.cloud/1/i92f4gcimeerrn24oj7l71pohrc87mwkav7qmlb7rgk19690/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+		<script src="https://cdn.tiny.cloud/1/i92f4gcimeerrn24oj7l71pohrc87mwkav7qmlb7rgk19690/tinymce/7/tinymce.min.js"
+			referrerpolicy="origin"></script>
 
-<script>
-      tinymce.init({
-        selector: '#mytextarea'
-      });
-    </script>
+		<script>
+			tinymce.init({
+				selector: '#mytextarea'
+			});
+		</script>
 
-</section>
+	</section>
 
 
-	
+
 </body>
+
 </html>

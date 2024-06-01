@@ -1,45 +1,49 @@
 <!doctype html>
-<html lang="en" xlmns:th="http://www.thymeleaf.org"  th:replace="normal/base::layout(~{::section})">
+<html lang="en" xlmns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+
 <head>
 	<meta charset="UTF-8" />
 	<title>This is Home Page</title>
 </head>
+
 <body>
 
-<section >
+	<section>
 
-	<div class="container">
-	
-		<div class="card">
-		
+		<div class="container">
+
+			<div class="card">
+
 				<div class="card-body my-5">
-				
-				<div class="container text-center">
-				
-				<img style="height:200px; width:200px;"  th:src="@{/image/contactbook.png}" alt="" />
-				
-				</div>
-				
-				<h1 class="text-center mt-3 text-secondary">
+
+					<div class="container text-center">
+
+						<img style="height:200px; width:200px;" th:src="@{/image/contactbook.png}" alt="" />
+
+					</div>
+
+					<h1 class="text-center mt-3 text-secondary">
 						Start Adding your contacts on Cloud...
 						<br />
-						</h1>
-						<h2 class="text-center text-secondary">
+					</h1>
+					<h2 class="text-center text-secondary">
 						Simply Login and you are good to go...</h2>
-						
-				
-				<div class="text-center mt-5">
-				
-						<a th:href="@{/user/add-contact}"  href="#">	<button class="btn bg-primary btn-lg text-white">Let's Go</button> </a>
-				</div>
-							
-				</div>		
-		
-		</div>
-	
-	</div>
 
-</section>
-	
+
+					<div class="text-center mt-5">
+
+						<a th:href="@{/user/add-contact}" href="#"> <button
+								class="btn bg-primary btn-lg text-white">Let's Go</button> </a>
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</section>
+
 </body>
+
 </html>

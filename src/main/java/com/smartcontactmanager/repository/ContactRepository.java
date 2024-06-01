@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.smartcontactmanager.entities.Contact;
+import com.smartcontactmanager.entities.User;
 
 import jakarta.transaction.Transactional;
 
@@ -24,4 +25,6 @@ public interface ContactRepository extends JpaRepository<Contact, Integer>{
 	
 	@Query("select c.image from Contact c where c.cId =:contactId")
 	public String getImageName(int contactId);
+	
+	public List<Contact> findByNameContainingAndUser(String keywords,User user);
 }
