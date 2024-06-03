@@ -56,7 +56,7 @@ public class HomeController {
 			
 			System.out.println(user);
 			user.setActiveFl(true);
-			user.setRole("ROLE_USER");
+			user.setRole("USER");
 			user.setPassword(passwordEncoder.encode(user.getPassword()));
 			
 			User save = this.userRepository.save(user);

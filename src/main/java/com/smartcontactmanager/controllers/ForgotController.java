@@ -1,6 +1,7 @@
 package com.smartcontactmanager.controllers;
 
 import java.security.NoSuchAlgorithmException;
+import java.security.Principal;
 import java.security.SecureRandom;
 
 import org.apache.catalina.valves.rewrite.RandomizedTextRewriteMap;
@@ -8,6 +9,7 @@ import org.hibernate.id.uuid.StandardRandomStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.parsing.Problem;
 import org.springframework.mail.MailException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,6 +33,9 @@ public class ForgotController {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	Random random = new Random(1000);
 	
@@ -81,14 +86,28 @@ public class ForgotController {
 					return "forgot-password-form";
 				}else {
 					model.addAttribute("title","Change your Password");
+					session.setAttribute("email", user.getEmail());
 					return "change-password-form";
 			}
 		} else {
-			
 			session.setAttribute("message",new Message("Wrong OTP entered ! Please enter the correct OTP", "alert-danger"));
 			return "verify_otp";
 		}
 		
+	}
+	
+
+	@PostMapping("/change-password")
+	public String changePassword(@RequestParam("newPassword") String newPassword, Principal principal, HttpSession session)
+	{
+		String email = (String) session.getAttribute("email");
+		User user = this.userRepository.getUserByUserName(email);
+		
+			user.setPassword(this.passwordEncoder.encode(newPassword));
+			this.userRepository.save(user);
+			
+			session.setAttribute("message",new Message("Password changed successfully !!!", "success"));
+			return "signin";
 	}
 
 }
