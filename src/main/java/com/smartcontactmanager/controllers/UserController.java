@@ -17,6 +17,8 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,10 +47,14 @@ import java.io.InputStream;
 public class UserController {
 	
 	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
 	private UserRepository userRepository;
 	
 	@Autowired
 	private ContactRepository contactRepository;
+	
 	
 	@ModelAttribute
 	public void addModelDetails(Model model, Principal principal) {
@@ -63,15 +69,17 @@ public class UserController {
 	}
 	
 	@RequestMapping("/welcome")
-	public String user_Dashboard(Model model,Principal principal)
+	public String user_Dashboard(Model model,Principal principal,HttpSession session)
 	{
 		model.addAttribute("title","User DashBoard");
+		session.removeAttribute("message");
 		return "normal/user_dashboard";
 	}
 	
 	@GetMapping("/add-contact")
-	public String addContactForm(Model model)
+	public String addContactForm(Model model,HttpSession session)
 	{
+		session.removeAttribute("message");
 		model.addAttribute("title","Add Contact");
 		model.addAttribute("header", "Add Contact");
 		model.addAttribute("contact",new Contact());
@@ -108,7 +116,7 @@ public class UserController {
 		contact.setUser(user);
 		user.getContacts().add(contact);
 		this.userRepository.save(user);
-	//	session.setAttribute("message",new Message("Contact saved successfully !!!", "success"));
+		session.setAttribute("message",new Message("Contact saved successfully !!!", "success"));
 		System.out.println("Contact successfully saved");
 		
 		} else {
@@ -120,15 +128,16 @@ public class UserController {
 		
 		} catch (Exception e) {
 			e.printStackTrace();
-	//		session.setAttribute("message",new Message("Something Went Wrong !!!", "danger"));
+			session.setAttribute("message",new Message("Something Went Wrong !!!", "danger"));
 		}
 		model.addAttribute("contact",new Contact());
 		return "normal/add_contact_form";
 	}
 	
 	@GetMapping("/show-contact/{page}")
-	public String showContact(@PathVariable("page") Integer page, Model model,Principal principal) {
+	public String showContact(@PathVariable("page") Integer page, Model model,Principal principal,HttpSession session) {
 		
+		session.removeAttribute("message");
 		model.addAttribute("title", "show contact");
 		
 		String userNameString = principal.getName();
@@ -145,9 +154,9 @@ public class UserController {
 	}
 	
 	@GetMapping("/{contactId}/contact")
-	public String showParticularContact(@PathVariable("contactId") Integer contactId, Model model, Principal principal)
+	public String showParticularContact(@PathVariable("contactId") Integer contactId, Model model, Principal principal,HttpSession session)
 	{
-		
+		session.removeAttribute("message");
 		Contact contact = this.contactRepository.findById(contactId).get();	
 		String name = principal.getName();
 		User user = this.userRepository.getUserByUserName(name);
@@ -164,9 +173,9 @@ public class UserController {
 	}
 	
 	@GetMapping("/{contactId}/delete")
-	public String deleteParticularContact(@PathVariable("contactId") Integer contactId, Model model, Principal principal,final HttpSession session)
+	public String deleteParticularContact(@PathVariable("contactId") Integer contactId, Model model, Principal principal, HttpSession session)
 	{
-		
+		session.removeAttribute("message");
 		String name = principal.getName();
 		User user = this.userRepository.getUserByUserName(name);
 		
@@ -189,7 +198,7 @@ public class UserController {
 				}
 			
 		this.contactRepository.delete(contact);
-	//	session.setAttribute("message",new Message("Contact deleted successfully !!!", "success"));
+		session.setAttribute("message",new Message("Contact deleted successfully !!!", "success"));
 		System.out.println("Contact successfully Deleted"+contactId);
 		} else {
 			model.addAttribute("title","Don't Try to be OverSmart");
@@ -200,9 +209,9 @@ public class UserController {
 	}
 	
 	@GetMapping("/{contactId}/update")
-	public String updateParticularContact(@PathVariable("contactId") Integer contactId, Model model, Principal principal)
+	public String updateParticularContact(@PathVariable("contactId") Integer contactId, Model model, Principal principal,HttpSession session)
 	{
-		
+		session.removeAttribute("message");
 		String name = principal.getName();
 		User user = this.userRepository.getUserByUserName(name);
 		
@@ -217,13 +226,13 @@ public class UserController {
 			model.addAttribute("title","Don't Try to be OverSmart");
 			return "login-fail";
 		}
-		
 		return "normal/add_contact_form";
 	}
 
 	@GetMapping("/profile")
-	public String yourProfile(Principal principal,Model model)  {
+	public String yourProfile(Principal principal,Model model,HttpSession session)  {
 		
+		session.removeAttribute("message");
 		String name = principal.getName();
 		User user = this.userRepository.getUserByUserName(name);
 		
@@ -231,5 +240,29 @@ public class UserController {
 		model.addAttribute("title", "My Profile");
 		
 		return "normal/your_profile";
+	}
+	
+	@GetMapping("/userSettings")
+	public String userSettings(Model model,HttpSession session) {
+		session.removeAttribute("message");
+		model.addAttribute("title", "User Settings");
+		return "normal/settings";
+	}
+	
+	@PostMapping("/change-password")
+	public String changePassword(@RequestParam("oldPassword") String oldPassword,@RequestParam("newPassword") String newPassword, Principal principal, HttpSession session)
+	{
+		String name = principal.getName();
+		User user = this.userRepository.getUserByUserName(name);
+		
+		if(this.passwordEncoder.matches(oldPassword, user.getPassword()))	
+		{
+			user.setPassword(this.passwordEncoder.encode(newPassword));
+			this.userRepository.save(user);
+			session.setAttribute("message",new Message("Password changed successfully !!!", "success"));
+			return "normal/user_dashboard";
+		}
+		session.setAttribute("message",new Message("Incorrect Old password !!!", "danger"));
+	return "normal/settings";
 	}
 }

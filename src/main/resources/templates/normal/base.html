@@ -69,7 +69,7 @@
 			Contacts</a>
 		<a href="#" th:href="@{/user/add-contact}" class="item"><i class="fa-solid fa-user-plus"></i> Add Contact</a>
 		<a href="#" th:href="@{/user/profile}" class="item"><i class="fa-solid fa-user"></i> Your Profile</a>
-		<a href="#" class="item"><i class="fa-solid fa-gear"></i> Settings</a>
+		<a href="#" th:href="@{/user/userSettings}" class="item"><i class="fa-solid fa-gear"></i> Settings</a>
 		<a href="#" onclick="document.getElementById('logout-form').submit(); return false;" class="item"><i
 				class="fa-solid fa-right-from-bracket"></i> Logout</a>
 
@@ -96,7 +96,7 @@
 
 			</div>
 
-			<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+		<!-- 	<th:block th:text="${#session.removeAttribute('message')}"></th:block> -->
 
 		</div>
 
