@@ -22,7 +22,7 @@ public class SearchController {
 	@Autowired
 	private UserRepository userRepository;
 	
-	@GetMapping("/search/{query}")
+	@GetMapping("/user/search/{query}")
 	public ResponseEntity<?> showSearchResult(@PathVariable("query") String query, Principal principal) {
 		
 		User user = this.userRepository.getUserByUserName(principal.getName());

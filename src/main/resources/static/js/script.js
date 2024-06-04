@@ -25,7 +25,7 @@ const search = () => {
 	} else {
 		//Sending request to Server
 		
-		let url = `http://localhost:8080/search/${query}`;
+		let url = `../search/${query}`;
 		
 		fetch(url).then((response) => {
 			
