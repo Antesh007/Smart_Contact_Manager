@@ -1,13 +1,8 @@
 package com.smartcontactmanager.controllers;
 
-import java.security.NoSuchAlgorithmException;
 import java.security.Principal;
-import java.security.SecureRandom;
 
-import org.apache.catalina.valves.rewrite.RandomizedTextRewriteMap;
-import org.hibernate.id.uuid.StandardRandomStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.parsing.Problem;
 import org.springframework.mail.MailException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;

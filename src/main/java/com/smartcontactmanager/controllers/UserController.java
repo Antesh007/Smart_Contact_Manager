@@ -1,23 +1,14 @@
 package com.smartcontactmanager.controllers;
 
-
-
-import java.nio.file.CopyOption;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 
-import java.util.*;
-
-import org.hibernate.validator.cfg.context.ReturnValueConstraintMappingContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.ssl.SslProperties.Bundles.Watch.File;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,12 +26,8 @@ import com.smartcontactmanager.helper.Message;
 import com.smartcontactmanager.repository.ContactRepository;
 import com.smartcontactmanager.repository.UserRepository;
 
-import jakarta.persistence.criteria.Path;
 import jakarta.servlet.http.HttpSession;
-
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 @Controller
 @RequestMapping("/user")
@@ -73,6 +60,7 @@ public class UserController {
 	{
 		model.addAttribute("title","User DashBoard");
 		session.removeAttribute("message");
+		System.out.println("Entered");
 		return "normal/user_dashboard";
 	}
 	
