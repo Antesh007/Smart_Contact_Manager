@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.smartcontactmanager.repository.UserRepository;
-import com.smartcontactmanager.entities.User;
+import com.smartcontactmanager.entities.UserEntity;
 import com.smartcontactmanager.helper.*;
 
 import jakarta.servlet.http.HttpSession;
@@ -32,7 +32,7 @@ public class HomeController {
 	@RequestMapping("/signup")
 	public String signUp(Model model) {
 		model.addAttribute("title","SignUp - Smart Contact Manager");
-		model.addAttribute("user", new User());
+		model.addAttribute("user", new UserEntity());
 		return "signup";
 	}
 	
@@ -43,7 +43,7 @@ public class HomeController {
 	}
 	
 	@PostMapping("/register")
-	public String registerUser(@ModelAttribute("user") User user,@RequestParam(value="agree", defaultValue = "false")boolean agree,Model model,
+	public String registerUser(@ModelAttribute("user") UserEntity user,@RequestParam(value="agree", defaultValue = "false")boolean agree,Model model,
 			HttpSession session)
 	{
 		try {
@@ -59,9 +59,9 @@ public class HomeController {
 			user.setRole("USER");
 			user.setPassword(passwordEncoder.encode(user.getPassword()));
 			
-			User save = this.userRepository.save(user);
+			UserEntity save = this.userRepository.save(user);
 			
-			model.addAttribute("user", new User());
+			model.addAttribute("user", new UserEntity());
 			session.setAttribute("message", new Message("Successfully Registered!!","alert-success"));
 			
 			return "signup";

@@ -5,7 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.smartcontactmanager.entities.User;
+import com.smartcontactmanager.entities.UserEntity;
 import com.smartcontactmanager.repository.UserRepository;
 
 public class UserDetailServiceImpl implements UserDetailsService {
@@ -16,7 +16,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
-		User userByUserName = userRepository.getUserByUserName(username);
+		UserEntity userByUserName = userRepository.getUserEntityByUserName(username);
 		
 		if(userByUserName == null)
 		{

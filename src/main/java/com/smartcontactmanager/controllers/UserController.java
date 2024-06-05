@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.smartcontactmanager.entities.Contact;
-import com.smartcontactmanager.entities.User;
+import com.smartcontactmanager.entities.UserEntity;
 import com.smartcontactmanager.helper.Message;
 import com.smartcontactmanager.repository.ContactRepository;
 import com.smartcontactmanager.repository.UserRepository;
@@ -49,7 +49,7 @@ public class UserController {
 		String emailString = principal.getName();
 		System.out.println("Username"+emailString);
 		
-		User userByUserName = this.userRepository.getUserByUserName(emailString);
+		UserEntity userByUserName = this.userRepository.getUserEntityByUserName(emailString);
 		System.out.println("User Details"+userByUserName.toString());
 		
 		model.addAttribute("user",userByUserName);
@@ -80,7 +80,7 @@ public class UserController {
 	{
 		try {
 		String userNameString = principal.getName();
-		User user = this.userRepository.getUserByUserName(userNameString);
+		UserEntity user = this.userRepository.getUserEntityByUserName(userNameString);
 		
 		if (file.isEmpty()) {
 			System.out.println("File is Empty");
@@ -101,7 +101,7 @@ public class UserController {
 				
 		if(cId == 0) {
 			
-		contact.setUser(user);
+		contact.setUserEntity(user);
 		user.getContacts().add(contact);
 		this.userRepository.save(user);
 		session.setAttribute("message",new Message("Contact saved successfully !!!", "success"));
@@ -129,11 +129,11 @@ public class UserController {
 		model.addAttribute("title", "show contact");
 		
 		String userNameString = principal.getName();
-		User user = this.userRepository.getUserByUserName(userNameString);
+		UserEntity user = this.userRepository.getUserEntityByUserName(userNameString);
 		
 		Pageable pageable = PageRequest.of(page, 7);
 		
-		Page<Contact> contactList = this.contactRepository.getContactByUserId(user.getId(), pageable);
+		Page<Contact> contactList = this.contactRepository.getContactByUserEntity(user.getId(), pageable);
 		model.addAttribute("contact",contactList);
 		model.addAttribute("currentPage",page);
 		model.addAttribute("totalPages",contactList.getTotalPages());
@@ -147,9 +147,9 @@ public class UserController {
 		session.removeAttribute("message");
 		Contact contact = this.contactRepository.findById(contactId).get();	
 		String name = principal.getName();
-		User user = this.userRepository.getUserByUserName(name);
+		UserEntity user = this.userRepository.getUserEntityByUserName(name);
 		
-		if(user.getId() == contact.getUser().getId())
+		if(user.getId() == contact.getUserEntity().getId())
 		{
 		model.addAttribute("title","User-"+contact.getName());
 		model.addAttribute("singleContact",contact);
@@ -165,11 +165,11 @@ public class UserController {
 	{
 		session.removeAttribute("message");
 		String name = principal.getName();
-		User user = this.userRepository.getUserByUserName(name);
+		UserEntity user = this.userRepository.getUserEntityByUserName(name);
 		
 		Contact contact = this.contactRepository.findById(contactId).get();
 		
-		if(user.getId() == contact.getUser().getId())
+		if(user.getId() == contact.getUserEntity().getId())
 		{
 			String imageString = this.contactRepository.getImageName(contactId);
 				if(!imageString.equalsIgnoreCase("contact"))
@@ -201,11 +201,11 @@ public class UserController {
 	{
 		session.removeAttribute("message");
 		String name = principal.getName();
-		User user = this.userRepository.getUserByUserName(name);
+		UserEntity user = this.userRepository.getUserEntityByUserName(name);
 		
 		Contact contact = this.contactRepository.findById(contactId).get();;
 		
-		if(user.getId() == contact.getUser().getId())
+		if(user.getId() == contact.getUserEntity().getId())
 		{
 		model.addAttribute("contact", contact);
 		model.addAttribute("title", "Update Contact");
@@ -222,7 +222,7 @@ public class UserController {
 		
 		session.removeAttribute("message");
 		String name = principal.getName();
-		User user = this.userRepository.getUserByUserName(name);
+		UserEntity user = this.userRepository.getUserEntityByUserName(name);
 		
 		model.addAttribute("user", user);
 		model.addAttribute("title", "My Profile");
@@ -241,7 +241,7 @@ public class UserController {
 	public String changePassword(@RequestParam("oldPassword") String oldPassword,@RequestParam("newPassword") String newPassword, Principal principal, HttpSession session)
 	{
 		String name = principal.getName();
-		User user = this.userRepository.getUserByUserName(name);
+		UserEntity user = this.userRepository.getUserEntityByUserName(name);
 		
 		if(this.passwordEncoder.matches(oldPassword, user.getPassword()))	
 		{

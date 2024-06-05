@@ -7,17 +7,17 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.smartcontactmanager.entities.User;
+import com.smartcontactmanager.entities.UserEntity;
 
 @SuppressWarnings("serial")
 public class CustomUserDetails implements UserDetails {
 	
 	
-	private User user;
+	private UserEntity user;
 	
 	
 
-	public CustomUserDetails(User user) {
+	public CustomUserDetails(UserEntity user) {
 		super();
 		this.user = user;
 	}

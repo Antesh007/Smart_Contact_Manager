@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.smartcontactmanager.entities.User;
+import com.smartcontactmanager.entities.UserEntity;
 import com.smartcontactmanager.helper.Message;
 import com.smartcontactmanager.repository.UserRepository;
 import com.smartcontactmanager.service.MessageService;
@@ -72,7 +72,7 @@ public class ForgotController {
 		int sendOTP = (int) session.getAttribute("sendOtp");
 		String email = (String) session.getAttribute("sendtoEmail");
 		
-		User user = this.userRepository.getUserByUserName(email);
+		UserEntity user = this.userRepository.getUserEntityByUserName(email);
 		
 		if(sendOTP == userOTP)
 		{
@@ -96,7 +96,7 @@ public class ForgotController {
 	public String changePassword(@RequestParam("newPassword") String newPassword, Principal principal, HttpSession session)
 	{
 		String email = (String) session.getAttribute("email");
-		User user = this.userRepository.getUserByUserName(email);
+		UserEntity user = this.userRepository.getUserEntityByUserName(email);
 		
 			user.setPassword(this.passwordEncoder.encode(newPassword));
 			this.userRepository.save(user);

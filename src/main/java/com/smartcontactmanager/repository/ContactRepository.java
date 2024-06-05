@@ -10,13 +10,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.smartcontactmanager.entities.Contact;
-import com.smartcontactmanager.entities.User;
+import com.smartcontactmanager.entities.UserEntity;
 
 import jakarta.transaction.Transactional;
 
 public interface ContactRepository extends JpaRepository<Contact, Integer>{
-	@Query("from Contact c where c.user.id =:userId")
-	public Page<Contact> getContactByUserId(@Param("userId")int userId,Pageable pageable);
+	
+	@Query("from Contact c where c.userEntity.id =:userEntityId")
+	public Page<Contact> getContactByUserEntity(@Param("userEntityId")int userEntityId,Pageable pageable);
 	
 	@Transactional
 	@Modifying
@@ -26,5 +27,5 @@ public interface ContactRepository extends JpaRepository<Contact, Integer>{
 	@Query("select c.image from Contact c where c.cId =:contactId")
 	public String getImageName(int contactId);
 	
-	public List<Contact> findByNameContainingAndUser(String keywords,User user);
+	public List<Contact> findByNameContainingAndAndUserEntity(String keywords,UserEntity userentity);
 }

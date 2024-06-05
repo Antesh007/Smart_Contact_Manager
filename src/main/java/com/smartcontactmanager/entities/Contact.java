@@ -28,7 +28,7 @@ public class Contact {
 	
 	@ManyToOne()
 	@JsonIgnore
-	private User user;
+	private UserEntity userEntity;
 	
 	
 	public int getcId() {
@@ -80,12 +80,13 @@ public class Contact {
 		this.description = description;
 	}
 	
-	public User getUser() {
-		return user;
+	public UserEntity getUserEntity() {
+		return userEntity;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserEntity(UserEntity userEntity) {
+		this.userEntity = userEntity;
 	}
+	
 	@Override
 	public String toString() {
 		return "Contact [cId=" + cId + ", name=" + name + ", secondName=" + secondName + ", work=" + work + ", email="
