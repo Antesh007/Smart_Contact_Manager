@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.smartcontactmanager.repository.UserRepository;
 import com.smartcontactmanager.entities.UserEntity;
 import com.smartcontactmanager.helper.*;
-
 import jakarta.servlet.http.HttpSession;
 
 @Controller
